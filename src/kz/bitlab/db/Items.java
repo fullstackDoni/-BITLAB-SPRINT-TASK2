@@ -48,4 +48,6 @@ public class Items {
         this.price = price;
     }
 
+    public void add(Items items) {
+    }
 }
