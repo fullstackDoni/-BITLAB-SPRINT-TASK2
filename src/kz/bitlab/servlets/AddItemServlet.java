@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kz.bitlab.db.DBConnection;
+import kz.bitlab.db.Items;
 
 import java.io.IOException;
 
@@ -12,6 +14,22 @@ import java.io.IOException;
 public class AddItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        String price = request.getParameter("price");
+
+        double ItemPrice = Double.parseDouble(price);
+
+        Items items = new Items();
+        items.setName(name);
+        items.setDescription(description);
+        items.setPrice(ItemPrice);
+
+        DBConnection.addItem(items);
+
+        response.sendRedirect("/");
+
 
     }
 

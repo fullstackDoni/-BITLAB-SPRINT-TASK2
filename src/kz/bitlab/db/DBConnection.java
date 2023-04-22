@@ -46,4 +46,20 @@ public class DBConnection {
         }
         return items;
     }
+    public static void addItem(Items items){
+        try {
+
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "INSERT INTO items (name, description,price) " +
+                    "VALUES (?, ?, ? )");
+            statement.setString(1,items.getName());
+            statement.setString(2,items.getDescription());
+            statement.setDouble(3,items.getPrice());
+
+            statement.executeUpdate();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
