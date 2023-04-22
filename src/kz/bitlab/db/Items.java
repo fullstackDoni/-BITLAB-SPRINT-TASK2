@@ -2,18 +2,18 @@ package kz.bitlab.db;
 
 public class Items {
     Long id;
-    String email;
-    String password;
-    String fullName;
+    String name;
+    String description;
+    double price;
 
     public Items() {
     }
 
-    public Items(Long id, String email, String password, String fullName) {
+    public Items(Long id, String name, String description, double price) {
         this.id = id;
-        this.email = email;
-        this.password = password;
-        this.fullName = fullName;
+        this.name = name;
+        this.description = description;
+        this.price = price;
     }
 
     public Long getId() {
@@ -24,27 +24,28 @@ public class Items {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getFullName() {
-        return fullName;
+    public double getPrice() {
+        return price;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setPrice(double price) {
+        this.price = price;
     }
+
 }
