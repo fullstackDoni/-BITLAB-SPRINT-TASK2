@@ -62,4 +62,50 @@ public class DBConnection {
             e.printStackTrace();
         }
     }
+    public static Items getItem(int id ){
+        Items items = null;
+        try {
+
+            PreparedStatement statement = connection.prepareStatement(""+
+                    "SELECT * FROM items WHERE id = ? LIMIT 1");
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                items = new Items();
+                items.setId(resultSet.getLong("id"));
+                items.setName(resultSet.getString("name"));
+                items.setDescription(resultSet.getString("description"));
+                items.setPrice(resultSet.getDouble("price"));
+            }
+            statement.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return items;
+    }
+    public static void UpdateItem(Items items){
+        try {
+
+            PreparedStatement statement = connection.prepareStatement(""+
+                    "UPDATE items " +
+                    "SET name = ?, " +
+                    "description = ?" +
+                    "price = ? " +
+                    "WHERE id = ?");
+            statement.setString(1,items.getName());
+            statement.setString(2,items.getDescription());
+            statement.setDouble(3,items.getPrice());
+            statement.setLong(4,items.getId());
+
+            statement.executeUpdate();
+            statement.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void DeleteItem(Items items){
+
+    }
 }

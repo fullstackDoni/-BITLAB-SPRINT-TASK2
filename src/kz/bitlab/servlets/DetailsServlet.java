@@ -10,32 +10,19 @@ import kz.bitlab.db.Items;
 
 import java.io.IOException;
 
-@WebServlet(value = "/AddItem")
-public class AddItemServlet extends HttpServlet {
+@WebServlet(value = "/details")
+public class DetailsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        String price = request.getParameter("price");
-
-        double ItemPrice = Double.parseDouble(price);
-
-        Items items = new Items();
-        items.setName(name);
-        items.setDescription(description);
-        items.setPrice(ItemPrice);
-
-        DBConnection.addItem(items);
-
-        response.sendRedirect("/");
-
-
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/AddItem.jsp").forward(request,response);
+
+        int id = Integer.parseInt(request.getParameter("item_id"));
+        Items items = DBConnection.getItem(id);
+        request.setAttribute("item",items);
+        request.getRequestDispatcher("/details.jsp").forward(request,response);
     }
 }
