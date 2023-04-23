@@ -46,14 +46,10 @@
         </div>
         <div class="row mt-2">
             <div class="col-12">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit">
+                <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#edit">
                     EDIT
                 </button>
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-12">
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
+                <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#delete">
                     DELETE
                 </button>
             </div>
@@ -105,6 +101,26 @@
                             </div>
                         </form>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="/DeleteItem" method="post">
+                        <input type="hidden" name="id" value="<%=items.getId()%>">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Confirm Delete</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h1>Are you sure?</h1>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                            <button type="submit" class="btn btn-danger">YES</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
