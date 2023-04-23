@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kz.bitlab.db.DBConnection;
 import kz.bitlab.db.Items;
+import kz.bitlab.db.Users;
 
 import java.io.IOException;
 
@@ -16,20 +17,25 @@ public class SaveItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int id = Integer.parseInt(request.getParameter("item_id"));
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        double price = Double.parseDouble(request.getParameter("price"));
+        Users users = (Users)request.getSession().getAttribute("currentUser");
+        if(users!=null){
+            int id = Integer.parseInt(request.getParameter("item_id"));
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+            double price = Double.parseDouble(request.getParameter("price"));
 
-        Items items = DBConnection.getItem(id);
-        if(items!=null){
-            items.setName(name);
-            items.setDescription(description);
-            items.setPrice(price);
-            DBConnection.UpdateItem(items);
-            response.sendRedirect("/details?item_id="+id);
+            Items items = DBConnection.getItem(id);
+            if(items!=null){
+                items.setName(name);
+                items.setDescription(description);
+                items.setPrice(price);
+                DBConnection.UpdateItem(items);
+                response.sendRedirect("/details?item_id="+id);
+            }else {
+                response.sendRedirect("/");
+            }
         }else {
-            response.sendRedirect("/");
+            response.sendRedirect("/login");
         }
     }
 }

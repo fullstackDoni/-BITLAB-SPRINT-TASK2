@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kz.bitlab.db.DBConnection;
+import kz.bitlab.db.Users;
 
 import java.io.IOException;
 
@@ -13,11 +14,15 @@ import java.io.IOException;
 public class DeleteItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Users users = (Users) request.getSession().getAttribute("currentUser");
+        if(users!=null){
+            int id = Integer.parseInt(request.getParameter("id"));
 
-        int id = Integer.parseInt(request.getParameter("id"));
+            DBConnection.DeleteItem(id);
 
-        DBConnection.DeleteItem(id);
-
-        response.sendRedirect("/");
+            response.sendRedirect("/");
+        }else{
+            response.sendRedirect("/login");
+        }
     }
 }

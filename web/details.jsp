@@ -44,6 +44,9 @@
                 <input type="text" class="form-control" readonly value="<%=items.getPrice()%>" name="price">
             </div>
         </div>
+        <%
+            if (currentUser != null) {
+        %>
         <div class="row mt-2">
             <div class="col-12">
                 <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#edit">
@@ -124,6 +127,9 @@
                 </div>
             </div>
         </div>
+        <%
+            }
+        %>
 
     </div>
     <%
