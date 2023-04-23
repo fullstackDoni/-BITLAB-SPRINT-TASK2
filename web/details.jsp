@@ -51,6 +51,13 @@
                 </button>
             </div>
         </div>
+        <div class="row mt-2">
+            <div class="col-12">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
+                    DELETE
+                </button>
+            </div>
+        </div>
         <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

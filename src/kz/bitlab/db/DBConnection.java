@@ -87,12 +87,14 @@ public class DBConnection {
     public static void UpdateItem(Items items){
         try {
 
-            PreparedStatement statement = connection.prepareStatement(""+
+            PreparedStatement statement = connection.prepareStatement("" +
                     "UPDATE items " +
-                    "SET name = ?, " +
-                    "description = ?" +
-                    "price = ? " +
+                    "SET " +
+                    "name = ?,"+
+                    "description = ?," +
+                    "price = ?," +
                     "WHERE id = ?");
+
             statement.setString(1,items.getName());
             statement.setString(2,items.getDescription());
             statement.setDouble(3,items.getPrice());
@@ -112,7 +114,7 @@ public class DBConnection {
             PreparedStatement statement = connection.prepareStatement(""+
                     "DELETE FROM items WHERE id = ?");
 
-            statement.setLong(1,id);
+            statement.setInt(1,id);
 
             statement.executeUpdate();
             statement.close();

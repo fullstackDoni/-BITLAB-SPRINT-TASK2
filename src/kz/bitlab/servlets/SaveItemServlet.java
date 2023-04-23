@@ -14,18 +14,13 @@ import java.io.IOException;
 public class SaveItemServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         int id = Integer.parseInt(request.getParameter("item_id"));
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-
         double price = Double.parseDouble(request.getParameter("price"));
+
         Items items = DBConnection.getItem(id);
         if(items!=null){
             items.setName(name);
