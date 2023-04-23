@@ -1,7 +1,7 @@
 package kz.bitlab.db;
 
 public class Items {
-    Long id;
+    int id;
     String name;
     String description;
     double price;
@@ -9,18 +9,18 @@ public class Items {
     public Items() {
     }
 
-    public Items(Long id, String name, String description, double price) {
+    public Items(int id, String name, String description, double price) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

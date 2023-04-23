@@ -33,7 +33,7 @@ public class DBConnection {
 
             while (resultSet.next()){
                 Items item = new Items();
-                item.setId(resultSet.getLong("id"));
+                item.setId(resultSet.getInt("id"));
                 item.setName(resultSet.getString("name"));
                 item.setDescription(resultSet.getString("description"));
                 item.setPrice(resultSet.getDouble("price"));
@@ -72,7 +72,7 @@ public class DBConnection {
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()){
                 items = new Items();
-                items.setId(resultSet.getLong("id"));
+                items.setId(resultSet.getInt("id"));
                 items.setName(resultSet.getString("name"));
                 items.setDescription(resultSet.getString("description"));
                 items.setPrice(resultSet.getDouble("price"));
@@ -96,7 +96,7 @@ public class DBConnection {
             statement.setString(1,items.getName());
             statement.setString(2,items.getDescription());
             statement.setDouble(3,items.getPrice());
-            statement.setLong(4,items.getId());
+            statement.setInt(4,items.getId());
 
             statement.executeUpdate();
             statement.close();
@@ -105,7 +105,21 @@ public class DBConnection {
             e.printStackTrace();
         }
     }
-    public static void DeleteItem(Items items){
+    public static void DeleteItem(int id){
 
+        try {
+
+            PreparedStatement statement = connection.prepareStatement(""+
+                    "DELETE FROM items WHERE id = ?");
+
+            statement.setLong(1,id);
+
+            statement.executeUpdate();
+            statement.close();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

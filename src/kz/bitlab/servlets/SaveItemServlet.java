@@ -36,9 +36,5 @@ public class SaveItemServlet extends HttpServlet {
         }else {
             response.sendRedirect("/");
         }
-
-
-
-        response.sendRedirect("/");
     }
 }
