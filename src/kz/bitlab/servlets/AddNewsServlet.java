@@ -9,27 +9,31 @@ import kz.bitlab.db.*;
 
 import java.io.IOException;
 
-@WebServlet(value = "/AddNews")
+@WebServlet(value = "/AddItem")
 public class AddNewsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Users user = (Users) request.getSession().getAttribute("currentUser");
 
-        if (user != null) {
-            String title = request.getParameter("title");
-            String content = request.getParameter("content");
+        Users users = (Users) request.getSession().getAttribute("currentUser");
 
-            News news = new News();
-            news.setTitle(title);
-            news.setContent(content);
-            news.setUsers(user);
 
-            DBConnection.AddNews(news);
+        if(users!=null){
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+            String price = request.getParameter("price");
 
-            response.sendRedirect("/AddNews");
-        } else {
+            double ItemPrice = Double.parseDouble(price);
+
+            Items items = new Items();
+            items.setName(name);
+            items.setDescription(description);
+            items.setPrice(ItemPrice);
+
+            DBConnection.addItem(items);
+        }else {
             response.sendRedirect("/login");
         }
+
 
     }
 
@@ -37,13 +41,7 @@ public class AddNewsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Users users = (Users) request.getSession().getAttribute("currentUser");
 
-        if (users != null) {
-            request.getRequestDispatcher("/AddNews.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("/login");
-        }
-
+        request.getRequestDispatcher("/AddItem.jsp").forward(request,response);
     }
 }
