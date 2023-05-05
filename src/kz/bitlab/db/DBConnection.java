@@ -84,21 +84,21 @@ public class DBConnection {
         }
         return items;
     }
-    public static void UpdateItem(Items items){
+    public static void UpdateItem(Items item){
         try {
 
-            PreparedStatement statement = connection.prepareStatement("" +
+            PreparedStatement statement = connection.prepareStatement(
                     "UPDATE items " +
                     "SET " +
-                    "name = ?,"+
-                    "description = ?," +
-                    "price = ?," +
+                    "name = ?, " +
+                    "description = ?, " +
+                    "price = ?, " +
                     "WHERE id = ?");
 
-            statement.setString(1,items.getName());
-            statement.setString(2,items.getDescription());
-            statement.setDouble(3,items.getPrice());
-            statement.setInt(4,items.getId());
+            statement.setString(1,item.getName());
+            statement.setString(2,item.getDescription());
+            statement.setDouble(3,item.getPrice());
+            statement.setLong(4,item.getId());
 
             statement.executeUpdate();
             statement.close();

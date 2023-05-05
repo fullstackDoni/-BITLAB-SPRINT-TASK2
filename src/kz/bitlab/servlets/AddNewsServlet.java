@@ -11,31 +11,39 @@ import kz.bitlab.db.Users;
 
 import java.io.IOException;
 
-@WebServlet(value = "/SaveItem")
-public class SaveItemServlet extends HttpServlet {
-
+@WebServlet(value = "/AddItem")
+public class AddNewsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Users users = (Users)request.getSession().getAttribute("currentUser");
+        Users users = (Users) request.getSession().getAttribute("currentUser");
+
+
         if(users!=null){
-            int id = Integer.parseInt(request.getParameter("item_id"));
             String name = request.getParameter("name");
             String description = request.getParameter("description");
-            double price = Double.parseDouble(request.getParameter("price"));
+            String price = request.getParameter("price");
 
-            Items item = DBConnection.getItem(id);
-            if(item!=null){
-                item.setName(name);
-                item.setDescription(description);
-                item.setPrice(price);
-                DBConnection.UpdateItem(item);
-                response.sendRedirect("/details?item_id="+id);
-            }else {
-                response.sendRedirect("/");
-            }
+            double ItemPrice = Double.parseDouble(price);
+
+            Items items = new Items();
+            items.setName(name);
+            items.setDescription(description);
+            items.setPrice(ItemPrice);
+
+            DBConnection.addItem(items);
         }else {
             response.sendRedirect("/login");
         }
+
+
+    }
+
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+        request.getRequestDispatcher("/AddItem.jsp").forward(request,response);
     }
 }
