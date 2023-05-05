@@ -1,16 +1,35 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Данияр
-  Date: 05.05.2023
-  Time: 14:34
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="kz.bitlab.db.Items" %>
+<%@ page import="kz.bitlab.db.News" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>SHOP LAPTOP</title>
+    <%@include file="head.jsp" %>
+</head>
+<body>
+<%@include file="navbar.jsp" %>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <%
+                ArrayList<News> news = (ArrayList<News>) request.getAttribute("news");
+                if(news!=null){
+                    for(News n:news){
+            %>
+            <div>
+                <h3><%=n.getTitle()%></h3>
+                <p><%=n.getContent()%></p>
+            </div>
+            <%}
+                }
+            %>
+            <div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>
